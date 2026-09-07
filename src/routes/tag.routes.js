@@ -4,7 +4,7 @@ import { validate } from '../middlewares/validate.js';
 import { tagValidation } from '../middlewares/models.validator.js';
 import { createTag, getTags, getTagById, updateTag, deleteTag } from '../controllers/tag.controller.js';
 
-const router = Router();
+export const router = Router();
 
 router.post('/tags', authMiddleware, adminCheckMiddleware, tagValidation, validate, createTag);
 router.get('/tags', authMiddleware, getTags);

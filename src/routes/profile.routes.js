@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { authMiddleware, adminCheckMiddleware } from '../middlewares/auth.js';
 import { validate } from '../middlewares/validate.js';
 import { registerValidation } from '../middlewares/models.validator.js';
-import { getProfile, updateProfile } from '../controllers/profile.controller.js';
+import { getProfile, updateProfile, deleteProfile } from '../controllers/profile.controller.js';
 
 export const router = Router();
 

@@ -22,3 +22,23 @@ export const adminCheckMiddleware = (req, res, next) => {
     }
     next();
 };
+
+export const ownerMiddleware = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const article = await Article.findByPk(id);
+
+        if (!article) {
+            return res.status(404).json({ message: 'Artículo no encontrado.' });
+        }
+
+        if (article.userId !== req.user.id && req.user.role !== 'admin') {
+            return res.status(403).json({ message: 'Acceso denegado: No eres el propietario de este recurso.' });
+        }
+
+        req.article = article;
+        next();
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al verificar la propiedad del recurso.', error: error.message });
+    }
+};
